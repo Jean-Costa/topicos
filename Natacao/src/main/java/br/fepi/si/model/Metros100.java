@@ -3,11 +3,9 @@ package br.fepi.si.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "metros100") 
-public class Metros100 extends Olimpiadas{
+public class Metros100 extends Olimpiadas {
 	
 	private static final long serialVersionUID = 1L;
 	

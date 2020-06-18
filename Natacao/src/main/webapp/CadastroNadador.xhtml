@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewAction action="#{cadastroNadadorMBean.preparaCadastrados}" />
+		<f:viewParam name="id" value="#{cadastroNadadorMBean.nadador}" />
+	</f:metadata>
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<ui:define name="titulo">Cadastro de Nadadores</ui:define>
+	</h:head>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+			<p:messages />
+			<h1>Cadastro de Nadadores</h1>
+			<p:panelGrid columns="2" id="painel">
+				<p:outputLabel value="Identificação" for="id" />
+				<p:inputText id="id" required="true"
+					value="#{cadastroNadadorMBean.nadador.id}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="0"
+						minFractionDigits="0" />
+				</p:inputText>
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="120" required="true"
+					value="#{cadastroNadadorMBean.nadador.nome}" />
+
+				<p:outputLabel value="Idade" for="idade" />
+				<p:inputText id="idade" required="true"
+					value="#{cadastroNadadorMBean.nadador.idade}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="0"
+						minFractionDigits="0" />
+				</p:inputText>
+
+
+				<p:outputLabel value="Pais" for="pais" />
+				<p:inputText id="pais" size="30" required="true"
+					value="#{cadastroNadadorMBean.nadador.pais}" />
+
+				<p:outputLabel value="Qtd. Medalhas" for="med" />
+				<p:inputText id="med" required="true"
+					value="#{cadastroNadadorMBean.nadador.numMedalhas}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="0"
+						minFractionDigits="0" />
+				</p:inputText>
+
+				<p:outputLabel value="Sexo" for="sexo" />
+				<p:inputText id="sexo" size="1" required="true"
+					value="#{cadastroNadadorMBean.nadador.sexo}" />
+
+				<p:outputLabel value="Tipo de Nado" for="tipo" />
+				<p:selectOneButton id="tipo" required="true"
+					value="#{cadastroNadadorMBean.nadador.estiloNatacao}">
+					<f:selectItems value="#{cadastroNadadorMBean.tiposNado}"
+						var="estiloNatacao" itemValue="#{estiloNatacao}"
+						itemLabel="#{estiloNatacao}" />
+				</p:selectOneButton>
+
+				<p:outputLabel />
+				<p:commandButton value="Salvar" icon="ui-icon-disk" update="@form"
+					action="#{cadastroNadadorMBean.salvar}" />
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

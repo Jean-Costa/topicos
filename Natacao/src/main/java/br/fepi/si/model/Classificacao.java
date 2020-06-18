@@ -13,45 +13,47 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "classificacao") 
+@Table(name = "classificacao")
 public class Classificacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private int numColocacao;
-	
+
 	private Olimpiadas prova;
 
 	public Classificacao() {
 		super();
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@NotNull
-	@DecimalMin ("1")
+	@DecimalMin("1")
 	@Column(name = "numero_colocacao", precision = 10, scale = 2, nullable = false)
 	public int getNumColocacao() {
 		return numColocacao;
 	}
+
 	public void setNumColocacao(int numColocacao) {
 		this.numColocacao = numColocacao;
 	}
-	
-	
+
 	@ManyToOne
-    @JoinColumn(name = "categoria_id")
+	@JoinColumn(name = "categoria_id")
 	public Olimpiadas getProva() {
 		return prova;
 	}
+
 	public void setProva(Olimpiadas prova) {
 		this.prova = prova;
 	}
@@ -83,7 +85,5 @@ public class Classificacao implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

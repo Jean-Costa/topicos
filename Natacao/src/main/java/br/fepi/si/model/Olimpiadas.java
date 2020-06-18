@@ -9,32 +9,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "olimpiadas") 
+@Table(name = "olimpiadas")
 public class Olimpiadas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String tipoDeProva;
 	private Date data;
 	private String pais;
 	private String tempoprova;
-	
+
 	private List<Classificacao> posicoes;
 
 	public Olimpiadas(String tipoDeProva, Date data, String pais, String tempoprova) {
@@ -43,15 +40,16 @@ public class Olimpiadas implements Serializable {
 		this.data = data;
 		this.pais = pais;
 		this.tempoprova = tempoprova;
-		
+
 		posicoes = new ArrayList<>();
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -60,42 +58,48 @@ public class Olimpiadas implements Serializable {
 	public String getTipoDeProva() {
 		return tipoDeProva;
 	}
+
 	public void setTipoDeProva(String tipoDeProva) {
 		this.tipoDeProva = tipoDeProva;
 	}
-	
+
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_prova", nullable = false)
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	@NotEmpty
 	@Size(max = 20)
-	@Column(name = "pais_olimpiadas", length = 20, nullable =	false)
+	@Column(name = "pais_olimpiadas", length = 20, nullable = false)
 	public String getPais() {
 		return pais;
 	}
+
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	
-	@Column(name = "tempo_prova",length = 20)
+
+	@Column(name = "tempo_prova", length = 20)
 	public String getTempoprova() {
 		return tempoprova;
 	}
+
 	public void setTempoprova(String tempoprova) {
 		this.tempoprova = tempoprova;
 	}
-	
-	@OneToMany(mappedBy = "classificacao")
+
+	@OneToMany
+	@JoinColumn(name = "olimpiadas")
 	public List<Classificacao> getPosicoes() {
 		return posicoes;
 	}
+
 	public void setPosicoes(Classificacao pos) {
 		this.posicoes.add(pos);
 	}
@@ -148,9 +152,5 @@ public class Olimpiadas implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }

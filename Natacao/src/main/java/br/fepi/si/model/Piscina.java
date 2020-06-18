@@ -4,22 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "piscina") 
+@Table(name = "piscina")
 public class Piscina implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +24,7 @@ public class Piscina implements Serializable {
 	private double medida;
 	private double temperatura;
 	private int numRaias;
-	
+
 	private List<Nadador> competidor;
 
 	public Piscina(double volume, double medida, double temperatura, int numRaias) {
@@ -38,7 +33,7 @@ public class Piscina implements Serializable {
 		this.medida = medida;
 		this.temperatura = temperatura;
 		this.numRaias = numRaias;
-		
+
 		competidor = new ArrayList<>();
 	}
 
@@ -46,59 +41,63 @@ public class Piscina implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@DecimalMin ("30")
+	@DecimalMin("30")
 	@Column(name = "volume_piscina", precision = 10, scale = 2, nullable = false)
 	public double getVolume() {
 		return volume;
 	}
+
 	public void setVolume(double volume) {
 		this.volume = volume;
 	}
-	
-	@DecimalMin ("30")
+
+	@DecimalMin("30")
 	@Column(name = "medida_piscina", precision = 10, scale = 2, nullable = false)
 	public double getMedida() {
 		return medida;
 	}
+
 	public void setMedida(double medida) {
 		this.medida = medida;
 	}
 
-	@DecimalMin ("23")
+	@DecimalMin("23")
 	@Column(name = "temperatura_piscina", precision = 10, scale = 2, nullable = false)
 	public double getTemperatura() {
 		return temperatura;
 	}
+
 	public void setTemperatura(double temperatura) {
 		this.temperatura = temperatura;
 	}
 
-	@DecimalMin ("8")
+	@DecimalMin("8")
 	@Column(name = "raias_piscina", precision = 10, scale = 2, nullable = false)
 	public int getNumRaias() {
 		return numRaias;
 	}
+
 	public void setNumRaias(int numRaias) {
 		this.numRaias = numRaias;
 	}
 
-	
 	@OneToMany
-    @JoinColumn(name = "competidor")
+	@JoinColumn(name = "competidor")
 	public List<Nadador> getCompetidor() {
 		return competidor;
 	}
+
 	public void setCompetidor(Nadador comp) {
 		this.competidor.add(comp);
 	}
@@ -143,6 +142,5 @@ public class Piscina implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

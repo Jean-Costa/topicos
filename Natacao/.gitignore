@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/linux,java-web
-# Edit at https://www.gitignore.io/?templates=linux,java-web
+# Created by https://www.toptal.com/developers/gitignore/api/linux,java-web
+# Edit at https://www.toptal.com/developers/gitignore?templates=linux,java-web
 
 ### Java-Web ###
 ## ignoring target file
@@ -21,4 +21,4 @@ target/
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-# End of https://www.gitignore.io/api/linux,java-web
+# End of https://www.toptal.com/developers/gitignore/api/linux,java-web

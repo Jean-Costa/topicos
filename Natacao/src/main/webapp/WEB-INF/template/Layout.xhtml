@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Natação</ui:insert></title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+	<header>
+		<h:graphicImage library="img" name="logo.png" height="75" width="75" />
+	</header>
+	<h:form id="menu">
+		<p:menubar id="nav">
+			<p:menuitem value="Home" icon="ui-icon-home" action="/Home?faces-redirect=true"/>
+
+			<p:submenu label="Cadastros" icon="ui-icon-plus">
+				<p:menuitem value="Nadadores" action="/CadastroNadador?faces-redirect=true"/>
+				<p:menuitem value="Piscina" action="/CadastroPiscina?faces-redirect=true"/>
+				<p:menuitem value="Olimpiadas"/>
+
+			</p:submenu>
+
+			<p:submenu label="Consultas" icon="ui-icon-search">
+				<p:menuitem value="Nadadores" action="/ConsultaNadador?faces-redirect=true"/>
+				<p:menuitem value="Piscina" action="/ConsultaPiscina?faces-redirect=true" />
+				<p:menuitem value="Olimpiadas" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+	<div id="conteudo">
+		<ui:insert name="corpo"></ui:insert>
+	</div>
+
+	<footer>Natação</footer>
+</h:body>
+
+</html>

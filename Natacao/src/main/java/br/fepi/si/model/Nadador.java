@@ -1,18 +1,16 @@
 package br.fepi.si.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,21 +18,32 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "nadador") 
+@Table(name = "nadador")
 public class Nadador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String nome;
 	private String sexo;
 	private String pais;
 	private int idade;
 	private int numMedalhas;
+
+	private Estilo estiloNatacao;
 	
-	private List<Estilo> estiloNatacao;
+	@Column(name = "estiilo_natacao", nullable = false)
+	@Enumerated(EnumType.STRING)
+	public Estilo getEstiloNatacao() {
+		return estiloNatacao;
+	}
+
+	public void setEstiloNatacao(Estilo estiloNatacao) {
+		this.estiloNatacao = estiloNatacao;
+	}
+
 	private Classificacao competidor;
-	
+
 	public Nadador(String nome, String sexo, String pais, int idade, int numMedalhas) {
 		super();
 		this.nome = nome;
@@ -42,15 +51,13 @@ public class Nadador implements Serializable {
 		this.pais = pais;
 		this.idade = idade;
 		this.numMedalhas = numMedalhas;
-		
-		estiloNatacao = new ArrayList<>();
 	}
 
 	public Nadador() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -62,66 +69,61 @@ public class Nadador implements Serializable {
 	}
 
 	@NotEmpty
-	@Size (max = 50)
-	@Column(name = "nome",length = 50, nullable = false)
+	@Size(max = 50)
+	@Column(name = "nome", length = 50, nullable = false)
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	@Column(name = "sexo",length = 9, nullable = false)
+
+	@Column(name = "sexo", length = 9, nullable = false)
 	public String getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
-	@Column(name = "pais",length = 20, nullable = false)
+	@Column(name = "pais", length = 20, nullable = false)
 	public String getPais() {
 		return pais;
 	}
+
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
 
 	@NotNull
-	@DecimalMin ("18")
+	@DecimalMin("18")
 	@Column(name = "idade", precision = 10, scale = 2, nullable = false)
 	public int getIdade() {
 		return idade;
 	}
+
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
 
-	@DecimalMin ("0")
+	@DecimalMin("0")
 	@Column(name = "medalhas", precision = 10, scale = 2)
 	public int getNumMedalhas() {
 		return numMedalhas;
 	}
+
 	public void setNumMedalhas(int numMedalhas) {
 		this.numMedalhas = numMedalhas;
 	}
 
-	
-	@OneToMany
-    @JoinColumn(name = "estilo_id")
-	public List<Estilo> getEstiloNatacao() {
-		return estiloNatacao;
-	}
-	public void setEstiloNatacao(Estilo estN) {
-		this.estiloNatacao.add(estN);
-	}
-
-
 	@ManyToOne
-    @JoinColumn(name = "categoria_id")
+	@JoinColumn(name = "categoria_id")
 	public Classificacao getCompetidor() {
 		return competidor;
 	}
+
 	public void setCompetidor(Classificacao competidor) {
 		this.competidor = competidor;
 	}
@@ -180,8 +182,5 @@ public class Nadador implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
